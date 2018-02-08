@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btnAnnulezTache"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="annulez"
+        android:layout_marginRight="70dp"
+        android:layout_marginEnd="70dp"
+        android:layout_alignBaseline="@+id/btnCreerTache"
+        android:layout_alignBottom="@+id/btnCreerTache"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/btnCreerTache"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:text="Creer la tache"
+        android:layout_marginRight="23dp"
+        android:layout_marginEnd="23dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/btnAnnulezTache"
+        android:layout_toStartOf="@+id/btnAnnulezTache" />
+
+    <EditText
+        android:id="@+id/champTitreCreerTache"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Titre"
+        android:ems="10"
+        android:hint="Titre"
+        android:inputType="textMultiLine"
+        tools:text="Titre"
+        android:layout_marginBottom="38dp"
+        android:layout_above="@+id/champDescriptionCreerTache"
+        android:layout_alignLeft="@+id/champDescriptionCreerTache"
+        android:layout_alignStart="@+id/champDescriptionCreerTache" />
+
+    <EditText
+        android:id="@+id/champHeureCreerTache"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnAnnulezTache"
+        android:layout_alignLeft="@+id/champMoisCreerTache"
+        android:layout_alignStart="@+id/champMoisCreerTache"
+        android:layout_marginBottom="29dp"
+        android:contentDescription="Heure"
+        android:ems="10"
+        android:hint="Heure"
+        android:inputType="time"
+        tools:text="Heure" />
+
+    <EditText
+        android:id="@+id/champMoisCreerTache"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/champHeureCreerTache"
+        android:layout_alignLeft="@+id/champUrlCreerTache"
+        android:layout_alignStart="@+id/champUrlCreerTache"
+        android:layout_marginBottom="27dp"
+        android:contentDescription="Mois"
+        android:ems="10"
+        android:hint="Date "
+        android:inputType="date"
+        tools:text="Mois" />
+
+    <EditText
+        android:id="@+id/champUrlCreerTache"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="URL"
+        android:ems="10"
+        android:hint="URL"
+        android:inputType="textMultiLine|textUri"
+        tools:text="URL"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/champDescriptionCreerTache"
+        android:layout_alignStart="@+id/champDescriptionCreerTache" />
+
+    <EditText
+        android:id="@+id/champDescriptionCreerTache"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Description"
+        android:ems="10"
+        android:hint="Description"
+        android:inputType="textMultiLine"
+        tools:text="Description"
+        android:layout_above="@+id/champUrlCreerTache"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="28dp" />
+
+</RelativeLayout>

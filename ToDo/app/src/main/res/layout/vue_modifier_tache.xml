@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btnModifierTache"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="37dp"
+            android:text="Modifier la tache"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp" />
+
+    <TextView
+        android:id="@+id/DateModifierTache"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/titreModifierTache"
+        android:layout_alignRight="@+id/titreModifierTache"
+        android:layout_below="@+id/champHeureModifierTache"
+        android:layout_marginTop="46dp"
+        android:text="Date :"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnAnnulezTache"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Annulez"
+        android:layout_alignBaseline="@+id/btnModifierTache"
+        android:layout_alignBottom="@+id/btnModifierTache"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="52dp"
+        android:layout_marginEnd="52dp" />
+
+        <EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/champTitreModifierTache"
+    android:inputType="textMultiLine"
+        android:layout_marginTop="14dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/champDescriptionModifierTache"
+        android:layout_alignStart="@+id/champDescriptionModifierTache" />
+
+    <TextView
+        android:text="Titre :"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/titreModifierTache"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/champTitreModifierTache"
+        android:layout_alignBottom="@+id/champTitreModifierTache"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/champHeureModifierTache"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/heureModifierTache"
+        android:layout_alignBottom="@+id/heureModifierTache"
+        android:layout_alignLeft="@+id/champDescriptionModifierTache"
+        android:layout_alignStart="@+id/champDescriptionModifierTache"
+        android:ems="10"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/champMoisCreerTache"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/DateModifierTache"
+        android:layout_alignBottom="@+id/DateModifierTache"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:ems="10"
+        android:inputType="number" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textImeMultiLine"
+        android:ems="10"
+        android:layout_alignBottom="@+id/urlModifierTache"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/champUrlModifierTache" />
+
+    <TextView
+        android:text="Heure :"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/heureModifierTache"
+        android:textSize="20sp"
+        android:layout_below="@+id/urlModifierTache"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="37dp" />
+
+    <TextView
+        android:text="Description :"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/descriptionModifierTache"
+        android:textSize="20sp"
+        android:layout_below="@+id/champTitreModifierTache"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="33dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/champDescriptionModifierTache"
+        android:inputType="textMultiLine"
+        android:layout_alignTop="@+id/descriptionModifierTache"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Saisir une URL :"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/urlModifierTache"
+        android:textSize="20sp"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/champDescriptionModifierTache"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
