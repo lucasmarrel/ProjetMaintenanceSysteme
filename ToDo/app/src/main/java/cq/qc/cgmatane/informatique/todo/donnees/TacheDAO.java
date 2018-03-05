@@ -64,7 +64,7 @@ public class TacheDAO extends AppCompatActivity {
                 String heure = curseur.getString(index_heure);
 
 
-                tache = new ListeDesTache(id,titre,description,url,heure,mois);
+                tache = new ListeDesTache(titre,description,url,heure,mois);
 
 
                 listeTache.add(tache);
@@ -127,8 +127,7 @@ public class TacheDAO extends AppCompatActivity {
                 tacheTeste.setDescription(tache.getDescription());
                 tacheTeste.setTitre(tache.getTitre());
                 tacheTeste.setUrl(tache.getUrl());
-                tacheTeste.setHeure(tache.getHeure());
-                tacheTeste.setMois(tache.getMois());
+                tacheTeste.setDate(tache.getDate());
                 return;
             }
         }

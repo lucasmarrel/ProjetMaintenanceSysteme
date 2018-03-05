@@ -35,7 +35,7 @@
         android:ems="10"
         android:hint="Titre"
         android:inputType="textMultiLine"
-        tools:text="Titre"
+        tools:text=""
         android:layout_marginBottom="38dp"
         android:layout_above="@+id/champDescriptionCreerTache"
         android:layout_alignLeft="@+id/champDescriptionCreerTache"
@@ -51,9 +51,9 @@
         android:layout_marginBottom="29dp"
         android:contentDescription="Heure"
         android:ems="10"
-        android:hint="Heure"
+        android:hint="HH:MM"
         android:inputType="time"
-        tools:text="Heure" />
+        tools:text="" />
 
     <EditText
         android:id="@+id/champMoisCreerTache"
@@ -65,9 +65,9 @@
         android:layout_marginBottom="27dp"
         android:contentDescription="Mois"
         android:ems="10"
-        android:hint="Date "
+        android:hint="YYYY/MM/JJ"
         android:inputType="date"
-        tools:text="Mois" />
+        tools:text="" />
 
     <EditText
         android:id="@+id/champUrlCreerTache"
@@ -77,7 +77,7 @@
         android:ems="10"
         android:hint="URL"
         android:inputType="textMultiLine|textUri"
-        tools:text="URL"
+        tools:text=""
         android:layout_centerVertical="true"
         android:layout_alignLeft="@+id/champDescriptionCreerTache"
         android:layout_alignStart="@+id/champDescriptionCreerTache" />
@@ -90,7 +90,7 @@
         android:ems="10"
         android:hint="Description"
         android:inputType="textMultiLine"
-        tools:text="Description"
+        tools:text=""
         android:layout_above="@+id/champUrlCreerTache"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="28dp" />

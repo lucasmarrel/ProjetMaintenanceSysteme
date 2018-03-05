@@ -11,28 +11,23 @@ public class ListeDesTache  {
     protected String url;
 
     protected String heure;
-    protected String minute;
-    protected String mois;
-    protected String jour;
+    protected Calendar date = Calendar.getInstance();
 
 
-    public ListeDesTache(int id, String titre, String description , String url ,String heure, String mois){
+    public ListeDesTache(int id, String titre, String description , String url, String date, String heure){
         super();
-        this.id = id;
         this.description = description;
         this.titre = titre;
         this.url = url;
-        this.heure = heure;
-        this.mois = mois;
+        this.date = ModeleDate.construireDate(date,heure);
     }
 
-    public ListeDesTache(String titre, String description ,String url, String jour,String heure, String mois){
+    public ListeDesTache(String titre, String description ,String url, String date, String heure){
         super();
         this.description = description;
         this.titre = titre;
         this.url = url;
-        this.heure = heure;
-        this.mois = mois;
+        this.date = ModeleDate.construireDate(date,heure);
     }
 
     public int getId() {
@@ -67,20 +62,36 @@ public class ListeDesTache  {
         this.url = url;
     }
 
-    public String  getHeure() {
-        return heure;
+    public Calendar getDate() {
+        return date;
     }
 
-    public void setHeure(String heure) {
-        this.heure = heure;
+    public void setDate(int jour, int mois, int annee, int heure, int minute) {
+        this.date.set(annee,mois-1,jour,heure,minute,00);
     }
 
-    public String getMois() {
-        return mois;
+    public void setDate(Calendar date) {
+        this.date = date;
     }
 
-    public void setMois(String mois) {
-        this.mois = mois;
+    public int getJour(){
+        return date.get(Calendar.DATE);
+    }
+
+    public int getMois(){
+        return date.get(Calendar.MONTH)+1;
+    }
+
+    public int getAnnee(){
+        return date.get(Calendar.YEAR);
+    }
+
+    public int getHeure(){
+        return date.get(Calendar.HOUR_OF_DAY);
+    }
+
+    public int getMinutes(){
+        return date.get(Calendar.MINUTE);
     }
 
 
@@ -90,9 +101,20 @@ public class ListeDesTache  {
         tache.put("titre", this.titre);
         tache.put("description", this.description);
         tache.put("URL",this.url);
-        tache.put("date",this.mois);
+        tache.put("date",ModeleDate.dateFrancaise(this.getDate()));
 
 
         return tache;
+    }
+
+    @Override
+    public String toString() {
+        return "ListeDesTache{" +
+                "id=" + id +
+                ", titre='" + titre + '\'' +
+                ", description='" + description + '\'' +
+                ", url='" + url + '\'' +
+                ", date=" + ModeleDate.dateFrancaise(this.getDate()) +
+                '}';
     }
 }

@@ -2,6 +2,7 @@ package cq.qc.cgmatane.informatique.todo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,10 +45,8 @@ public class VueModifierTache extends AppCompatActivity {
         champTitre.setText(tache.getTitre());
         champDescription.setText(tache.getDescription());
         champUrl.setText(tache.getUrl());
-        champHeure.setText(tache.getHeure());
-        champMois.setText(tache.getMois());
-     //   champJour.setText(tache.getJour());
-        champHeure.setText(tache.getHeure());
+        champMois.setText(tache.getAnnee()+"/"+tache.getMois()+"/"+tache.getJour());
+        champHeure.setText(tache.getHeure()+":"+tache.getMinutes());
 
       valider.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -70,16 +69,10 @@ public class VueModifierTache extends AppCompatActivity {
         String titre = champTitre.getText().toString();
         String description = champDescription.getText().toString();
         String url = champUrl.getText().toString();
-     //   String jour = champJour.getText().toString();
-        String mois = champMois.getText().toString();
         String heure = champHeure.getText().toString();
+        String date = champMois.getText().toString();
 
-        tache.setTitre(titre);
-        tache.setDescription(description);
-        tache.setUrl(url);
-      //  tache.setJour(jour);
-        tache.setMois(mois);
-        tache.setHeure(heure);
+        tache = new ListeDesTache(tache.getId(),titre,description,url,date,heure);
 
         accesseurTache.modifierTache(tache);
 

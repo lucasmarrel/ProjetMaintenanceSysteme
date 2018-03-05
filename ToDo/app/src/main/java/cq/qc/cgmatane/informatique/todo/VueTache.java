@@ -68,7 +68,7 @@ public class VueTache extends AppCompatActivity {
                         this,
                         listeTache,
                         android.R.layout.two_line_list_item,
-                        new String[]{"titre","description"},
+                        new String[]{"titre","date"},
                         new int[] {android.R.id.text1,android.R.id.text2}
                 );
         vueListeTache.setAdapter(adapterVueListeTache);
