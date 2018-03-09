@@ -20,7 +20,7 @@ import static cq.qc.cgmatane.informatique.todo.R.id.btnAjouterTache;
 public class VueTache extends AppCompatActivity {
 
 
-    protected TacheDAO accesseurTache = TacheDAO.getInstance();
+    protected TacheDAO accesseurTache;
     protected List<HashMap<String, String>> listeTache;
     protected ListView vueListeTache;
     protected Button AjouterTache;
@@ -32,6 +32,9 @@ public class VueTache extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_list_tache);
+
+        BaseDeDonnees.getInstance(getApplicationContext());
+        accesseurTache = TacheDAO.getInstance();
 
         AjouterTache = (Button) findViewById(btnAjouterTache);
         AjouterTache.setOnClickListener(new View.OnClickListener() {
@@ -55,8 +58,6 @@ public class VueTache extends AppCompatActivity {
             }
 
         });
-        BaseDeDonnees.getInstance(getApplicationContext());
-        accesseurTache = TacheDAO.getInstance();
         afficherTousLesTache();
     }
 

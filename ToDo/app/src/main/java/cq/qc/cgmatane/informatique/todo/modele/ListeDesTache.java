@@ -30,6 +30,14 @@ public class ListeDesTache  {
         this.date = ModeleDate.construireDate(date,heure);
     }
 
+    public ListeDesTache(int id, String titre, String description ,String url, Calendar date){
+        super();
+        this.description = description;
+        this.titre = titre;
+        this.url = url;
+        this.date = date;
+    }
+
     public int getId() {
         return id;
     }

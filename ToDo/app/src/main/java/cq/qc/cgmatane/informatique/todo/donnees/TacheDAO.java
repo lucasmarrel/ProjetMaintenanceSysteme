@@ -3,9 +3,17 @@ package cq.qc.cgmatane.informatique.todo.donnees;
 
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
 import android.util.Log;
 
+import java.sql.PreparedStatement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,44 +23,47 @@ import static android.R.attr.description;
 
 public class TacheDAO extends AppCompatActivity {
 
-   private BaseDeDonnees accesseurBaseDeDonnees;
+    private static TacheDAO instance = null;
+    private ListeDesTache tache;
+    private List<ListeDesTache> listeTache;
+    private BaseDeDonnees accesseurBaseDeDonnees;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    private TacheDAO()
-    {
-        super();
+    public static  TacheDAO getInstance(){
 
-       // Log.d("DAO", "instance bdd : " + this.accesseurBaseDeDonnees);
-        accesseurBaseDeDonnees = BaseDeDonnees.getInstance();
-        listeTache = new ArrayList<ListeDesTache>();
-        listeTache = listerTache();
-
-        /*
-        ListeDesTache tache;
-        tache = new ListeDesTache(33, "Android pour les nuls", "apprendre a coder une application Android","https://stackoverflow.com/questions/454315/how-do-you-format-date-and-time-in-android" ,"23:59", "Septembre", "23");
-        listeTache.add(tache);
-        tache = new ListeDesTache(34, "Java pour les nuls", "apprendre a coder en java","https://openclassroom/java.com" ,"23:59", "Septembre", "23");
-        listeTache.add(tache);
-        */
-
+        if (instance == null){
+            instance = new TacheDAO();
+        }
+        return  instance;
     }
 
+    public TacheDAO() {
+        super();
 
+        try {
+            accesseurBaseDeDonnees = BaseDeDonnees.getInstance();
+            listeTache = new ArrayList<>();
+
+            listeTache = listerTache();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public  List<ListeDesTache> listerTache(){
 
-        ListeDesTache tache;
         try {
-
-            String LISTER_TACHE = "SELECT * FROM tache";
-            Cursor curseur = accesseurBaseDeDonnees.getReadableDatabase().rawQuery(LISTER_TACHE,null);
+            String LISTER_TACHES = "SELECT * FROM tache ORDER BY date";
+            Cursor curseur = accesseurBaseDeDonnees.getReadableDatabase().rawQuery(LISTER_TACHES,null);
 
             listeTache.clear();
             int index_id = curseur.getColumnIndex("id_tache");
             int index_titre = curseur.getColumnIndex("titre");
             int index_description = curseur.getColumnIndex("description");
             int index_url = curseur.getColumnIndex("url");
-            int index_mois = curseur.getColumnIndex("mois");
-            int index_heure = curseur.getColumnIndex("heure");
+            int index_date = curseur.getColumnIndex("date");
 
             for (curseur.moveToFirst(); !curseur.isAfterLast();curseur.moveToNext()) {
 
@@ -60,13 +71,14 @@ public class TacheDAO extends AppCompatActivity {
                 String titre = curseur.getString(index_titre);
                 String description = curseur.getString(index_description);
                 String url = curseur.getString(index_url);
-                String mois = curseur.getString(index_mois);
-                String heure = curseur.getString(index_heure);
+                String date = curseur.getString(index_date);
 
 
-                tache = new ListeDesTache(titre,description,url,heure,mois);
-
-
+                Calendar calendrier = Calendar.getInstance();
+                calendrier.setTime(dateFormat.parse(date));
+                Log.d("ERREUR","TEST");
+                tache = new ListeDesTache(id,titre, description, url, calendrier);
+                Log.d("ERREUR",tache.toString());
                 listeTache.add(tache);
             }
 
@@ -80,61 +92,52 @@ public class TacheDAO extends AppCompatActivity {
 
     }
 
+    public ListeDesTache trouverTache(int id){
 
-    // patron Singleton
-    private  static  TacheDAO instance = null;
-
-    public static TacheDAO getInstance() {
-        if(null == instance){
-            instance = new TacheDAO();
-        }
-        return instance;
-    }
-    // fin singleton
-
-    List<ListeDesTache> listeTache;
-
-    public ListeDesTache trouverTache(int id)
-    {
-        for (ListeDesTache tache: this.listeTache)
-        {
-            if(tache.getId() == id)
-                return tache;
-        }
-        return null;
-    }
-
-
-    public List<HashMap<String,String>> listerTacheEnHashmap()
-    {
-       // this.listerLestaches();
-        List<HashMap<String,String>> listerTacheEnHashmap =
-                new ArrayList<HashMap<String,String >>();
-
-        for(ListeDesTache tache : this.listeTache){
-            listerTacheEnHashmap.add(tache.exporterHashMap());
-        }
-        return listerTacheEnHashmap;
-    }
-
-
-    public void modifierTache(ListeDesTache tache)
-    {
-        for (ListeDesTache tacheTeste : this.listeTache)
-        {
-            if (tacheTeste.getId() == tache.getId())
-            {
-                tacheTeste.setDescription(tache.getDescription());
-                tacheTeste.setTitre(tache.getTitre());
-                tacheTeste.setUrl(tache.getUrl());
-                tacheTeste.setDate(tache.getDate());
-                return;
+        for (ListeDesTache tache : this.listeTache){
+            if (tache.getId() == id){
+                return  tache;
             }
         }
+        return  null;
     }
 
-    public void ajouterTache (ListeDesTache tache){
-        listeTache.add(tache);
+    public void ajouterTache(ListeDesTache tache){
+        try {
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("titre", tache.getTitre());
+            contentValues.put("description", tache.getDescription());
+            contentValues.put("url", tache.getUrl());
+            contentValues.put("date", dateFormat.format(tache.getDate().getTime()));
+            accesseurBaseDeDonnees.getWritableDatabase().insertOrThrow("tache","", contentValues);
+
+        } catch (Exception e) {
+            System.out.println("ERREUR : " + e.getMessage());
+        }
     }
 
+    public List<HashMap<String,String>> listerTacheEnHashmap(){
+
+        List<ListeDesTache> listeTache = listerTache();
+
+        List<HashMap<String,String>> listeTacheEnHashmap = new ArrayList<>();
+
+        for (ListeDesTache tache : listeTache){
+            listeTacheEnHashmap.add(tache.exporterHashMap());
+        }
+
+        return  listeTacheEnHashmap;
+    }
+
+    public void modifierTache(ListeDesTache tache){
+        accesseurBaseDeDonnees.getWritableDatabase().execSQL("UPDATE tache SET titre =\""+ tache.getTitre() +
+                "\", description = \""+ tache.getDescription() + "\", url = \"" + tache.getUrl()
+                + "\", date = \""+ dateFormat.format(tache.getDate().getTime()) + "\" WHERE id_tache = "+ tache.getId());
+
+    }
+
+    public void supprimerEvenement(int id){
+        accesseurBaseDeDonnees.getWritableDatabase().delete("tache","tache = " + id,null);
+    }
 }
